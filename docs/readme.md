@@ -1,2 +1,2 @@
-Document files
-![alt text](/docs/project2_db_UML.jpg)
+Basic UML Model
+![DB UML model](/docs/project2_db_UML.jpg)
