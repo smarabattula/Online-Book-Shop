@@ -1,0 +1,1 @@
+rails g scaffold Transaction quantity:integer total_price:decimal
