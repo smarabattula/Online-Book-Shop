@@ -3,6 +3,7 @@
 <% if current_user %>
   Logged in as <%= current_user.name %>.
   <%= link_to "Edit profile", edit_user_path(current_user)%>
+  <%= button_to "Delete", user_path(current_user), method: :delete, data: { confirm: 'Are you sure?' } %>
   <%= link_to "Log Out", logout_path %>
 
 <% else %>
