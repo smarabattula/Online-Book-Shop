@@ -11,52 +11,52 @@
     </div>
   <% end %>
 
-  <div>
+  <div class="field">
     <%= form.label :username, style: "display: block" %>
     <%= form.text_field :username %>
   </div>
 
-  <div>
+  <div class="field">
     <%= form.label :password, style: "display: block" %>
     <%= form.password_field :password %>
   </div>
 
-  <div>
+  <div class="field">
     <%= form.label :password_confirmation, style: "display: block" %>
     <%= form.password_field :password_confirmation %>
   </div>
 
-  <div>
+  <div class="field">
     <%= form.label :name, style: "display: block" %>
     <%= form.text_field :name %>
   </div>
 
-  <div>
+  <div class="field">
     <%= form.label :email, style: "display: block" %>
     <%= form.text_field :email %>
   </div>
 
-  <div>
+  <div clss="field">
     <%= form.label :address, style: "display: block" %>
     <%= form.text_field :address %>
   </div>
 
-  <div>
+  <div class="field">
     <%= form.label :credit_card_number, style: "display: block" %>
     <%= form.text_field :credit_card_number %>
   </div>
 
-  <div>
+  <div class="field">
     <%= form.label :phone_number, style: "display: block" %>
     <%= form.text_field :phone_number %>
   </div>
 
-  <div>
+  <div class="field">
     <%= form.label :is_admin, style: "display: block" %>
     <%= form.check_box :is_admin %>
   </div>
 
-  <div>
+  <div class="actions">
     <%= form.submit %>
   </div>
 <% end %>
