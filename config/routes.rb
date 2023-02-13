@@ -1,11 +1,10 @@
 Rails.application.routes.draw do
   resources :transactions
-  resources :credit_cards
-  resources :products
-  root 'home#index'
+  resources :reviews
   resources :users
   resources :books
   resources :sessions, only: [:new, :create, :destroy]
+  root 'home#index'
   get 'signup', to: "users#new", as: 'signup'
   get 'login', to: "sessions#new", as: 'login'
   get 'logout', to: "sessions#destroy", as: 'logout'
