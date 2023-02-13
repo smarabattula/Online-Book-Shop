@@ -18,6 +18,7 @@ class BooksController < ApplicationController
 
   # GET /books/1/edit
   def edit
+    @book =
   end
 
   # POST /books or /books.json
