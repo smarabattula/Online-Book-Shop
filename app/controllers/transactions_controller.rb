@@ -1,6 +1,5 @@
 class TransactionsController < ApplicationController
   before_action :set_transaction, only: %i[ show edit update destroy ]
-
   # GET /transactions or /transactions.json
   def index
     @transactions = Transaction.all
@@ -13,6 +12,11 @@ class TransactionsController < ApplicationController
   # GET /transactions/new
   def new
     @transaction = Transaction.new
+
+    if @book.nil?
+      @book = Book.find(params[:book_id])
+    end
+    @credit_card = current_user.credit_card_number
   end
 
   # GET /transactions/1/edit
@@ -22,6 +26,13 @@ class TransactionsController < ApplicationController
   # POST /transactions or /transactions.json
   def create
     @transaction = Transaction.new(transaction_params)
+
+    @transaction.transaction_number = Array.new(10){[*"A".."Z", *"0".."9"].sample}.join
+    #here RHS part params[:transaction][:book_id] is showing nil
+    @book = Book.find(params[:transaction][:book_id])
+    @transaction.user_id = current_user.id
+    @book.Stock = @book.Stock - @transaction.quantity
+    @book.save
 
     respond_to do |format|
       if @transaction.save
@@ -65,6 +76,6 @@ class TransactionsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def transaction_params
-      params.require(:transaction).permit(:quantity, :total_price)
+      params.require(:transaction).permit(:book_id, :user_id, :quantity, :total_price)
     end
 end

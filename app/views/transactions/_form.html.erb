@@ -10,18 +10,32 @@
       </ul>
     </div>
   <% end %>
-
+  <p>You are purchasing the book: <b><%= @book.Name %></b></p>
   <div>
+  <% qty = @book.Stock %>
     <%= form.label :quantity, style: "display: block" %>
-    <%= form.number_field :quantity %>
+    <%= form.number_field :quantity, :id => 'quantity', min: 1, max: qty, onchange: "calculateTotalPrice();"%>
   </div>
 
   <div>
     <%= form.label :total_price, style: "display: block" %>
-    <%= form.text_field :total_price %>
+    <%= form.text_field :total_price, :id => 'total_price', :readonly => true %>
   </div>
-
+  <div>
+  <!--div class="field">
+  <%credit_card_number = @credit_card%>
+    <%= form.label credit_card_number, "Credit card number" %>
+    <%= form.text_field credit_card_number, :id => 'credit_card_no' %>
+  </div-->
   <div>
     <%= form.submit %>
   </div>
+
 <% end %>
+
+ <script type="text/javascript">
+   function calculateTotalPrice() {
+       var price = "<%= @book.Price %>";
+       document.getElementById('total_price').value = document.getElementById('quantity').value * price;
+   }
+</script>
