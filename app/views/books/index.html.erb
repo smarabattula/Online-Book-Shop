@@ -6,10 +6,11 @@
   <% @books.each do |book| %>
     <%= render book %>
     <p>
-      <%= link_to "Show this book", book %>
-      <td><%= link_to_if book.Stock > 0 && current_user.is_admin?, 'Purchase this book', new_transaction_path(:book_id => book.id)%></td>
+      <td><%= link_to "Show this book", book %></td>
+      <td><%= link_to_if book.Stock > 0, 'Purchase this book', new_transaction_path(:book_id => book.id)%></td>
     </p>
   <% end %>
 </div>
 
 <%= link_to "New book", new_book_path %>
+<%= link_to "High rating books", high_rating_path %>
