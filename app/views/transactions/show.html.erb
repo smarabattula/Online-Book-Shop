@@ -1,10 +1,36 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @transaction %>
+<table cellspacing=20 >
+  <thead>
+    <tr>
+      <th>Transaction number</th>
+      <th>Book ID</th>
+      <th>Book Name</th>
+      <th>User ID </th>
+      <th>Credit card number </th>
+      <th>Address </th>
+      <th>Phone number </th>
+      <th>Quantity</th>
+      <th>Total Price</th>
+      <th colspan="5"></th>
 
+    </tr>
+  </thead>
+    <% @transactions.each do |transaction|%>
+  <tbody>
+        <td><%= transaction.transaction_number %></td>
+        <td><%= transaction.book_id %></td>
+        <td><%= transaction.book.Name %></td>
+        <td><%= transaction.user_id %></td>
+        <td><%= transaction.credit_card_number %></td>
+        <td><%= transaction.address %></td>
+        <td><%= transaction.phone_number %></td>
+        <td><%= transaction.quantity %></td>
+        <td><%= transaction.total_price %></td>
+    </tr>
+  </tbody>
+  <%end%>
+</table>
 <div>
-  <%= link_to "Edit this transaction", edit_transaction_path(@transaction) %> |
-  <%= link_to "Back to transactions", transactions_path %>
-
-  <%= button_to "Destroy this transaction", @transaction, method: :delete %>
 </div>
+

@@ -12,6 +12,10 @@
   <% end %>
   <p>You are purchasing the book: <b><%= @book.Name %></b></p>
   <div>
+  <%= form.hidden_field :book_id, value: @book.id %>
+  </div>
+
+  <div>
   <% qty = @book.Stock %>
     <%= form.label :quantity, style: "display: block" %>
     <%= form.number_field :quantity, :id => 'quantity', min: 1, max: qty, onchange: "calculateTotalPrice();"%>
@@ -22,11 +26,18 @@
     <%= form.text_field :total_price, :id => 'total_price', :readonly => true %>
   </div>
   <div>
-  <!--div class="field">
-  <%credit_card_number = @credit_card%>
-    <%= form.label credit_card_number, "Credit card number" %>
-    <%= form.text_field credit_card_number, :id => 'credit_card_no' %>
-  </div-->
+  <div class="field">
+    <%= form.label :credit_card_number, "Credit card number" %>
+    <%= form.text_field :credit_card_number, value:current_user.credit_card_number %>
+  </div>
+    <div class="field">
+    <%= form.label :address, "Address" %>
+    <%= form.text_field :address, value:current_user.address %>
+  </div>
+    <div class="field">
+    <%= form.label :phone_number, "Phone Number" %>
+    <%= form.text_field :phone_number, value:current_user.phone_number %>
+  </div>
   <div>
     <%= form.submit %>
   </div>
