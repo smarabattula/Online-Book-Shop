@@ -7,7 +7,7 @@
     <%= render book %>
     <p>
       <%= link_to "Show this book", book %>
-      <td><%= link_to_if book.Stock > 0 && current_user.is_admin?, 'Purchase this book', new_transaction_path(:book_id => book.id)%></td>
+      <td><%= link_to_if book.Stock > 0 && !current_user.is_admin?, 'Purchase this book', new_transaction_path(:book_id => book.id)%></td>
     </p>
   <% end %>
 </div>

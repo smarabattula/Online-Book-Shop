@@ -9,5 +9,8 @@ Rails.application.routes.draw do
   get 'login', to: "sessions#new", as: 'login'
   get 'logout', to: "sessions#destroy", as: 'logout'
   get '/books/:id', to: 'books#show'
+  get '/transactions', to: 'transactions#show', as: 'show_transactions'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
+
+

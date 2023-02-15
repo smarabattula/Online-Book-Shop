@@ -1,14 +1,37 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Transactions</h1>
+<table cellspacing=20 >
+  <thead>
+    <tr>
+      <th>Transaction number</th>
+      <th>Book ID</th>
+      <th>Book Name</th>
+      <th>User ID </th>
+      <th>Credit card number </th>
+      <th>Address </th>
+      <th>Phone number </th>
+      <th>Quantity</th>
+      <th>Total Price</th>
+      <th colspan="5"></th>
+    </tr>
+  </thead>
 
-<div id="transactions">
-  <% @transactions.each do |transaction| %>
-    <%= render transaction %>
-    <p>
-      <%= link_to "Show this transaction", transaction %>
-    </p>
-  <% end %>
+    <% @transactions.each do |transaction|%>
+    <tbody>
+        <tr>
+        <td><%= transaction.transaction_number %></td>
+        <td><%= transaction.book_id %></td>
+        <td><%= transaction.book.Name %></td>
+        <td><%= transaction.user_id %></td>
+        <td><%= transaction.credit_card_number %></td>
+        <td><%= transaction.address %></td>
+        <td><%= transaction.phone_number %></td>
+        <td><%= transaction.quantity %></td>
+        <td><%= transaction.total_price %></td>
+        </tr>
+    </tbody>
+    <%end%>
+</table>
+<div>
 </div>
 
-<%= link_to "New transaction", new_transaction_path %>
