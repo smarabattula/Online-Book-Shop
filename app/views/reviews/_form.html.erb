@@ -13,7 +13,7 @@
 
   <div>
     <%= form.label :Rating, style: "display: block" %>
-    <%= form.number_field :Rating %>
+    <%= form.number_field :Rating, min: 1, max: 5 %>
   </div>
 
   <div>
