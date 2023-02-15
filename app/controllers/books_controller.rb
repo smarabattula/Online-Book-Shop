@@ -6,6 +6,16 @@ class BooksController < ApplicationController
     @books = Book.all
   end
 
+  def filter
+    @books = Book.all
+    if params[:author].present?
+      @books = @books.where(author: params[:author])
+    end
+    if params[:rating].present?
+      @books = Book.joins(:reviews).where(reviews: { rating: params[:rating]})
+    end
+    render :index
+  end
   # GET /books/1 or /books/1.json
   def show
     @book = Book.find(params[:id])
@@ -49,6 +59,14 @@ class BooksController < ApplicationController
     end
   end
 
+  # Rating is 0 ~ 10
+  def high_rating
+    high_rating_book_ids = Review.group(:books_id).average("Rating").select do |item,val|
+      val > 7
+    end
+    @high_rating_books = Book.where(id: high_rating_book_ids.keys)
+  end
+
   # DELETE /books/1 or /books/1.json
   def destroy
     @book.destroy
@@ -67,6 +85,6 @@ class BooksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def book_params
-      params.require(:book).permit(:Name, :Author, :Publisher, :Price, :Stock)
+      params.require(:book).permit(:book_id,:Name, :Author, :Publisher, :Price, :Stock)
     end
 end

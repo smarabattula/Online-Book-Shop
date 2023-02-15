@@ -20,7 +20,7 @@
     <%= form.label :Review, style: "display: block" %>
     <%= form.text_field :Review %>
   </div>
-
+  <%= form.hidden_field :book_id, value: @book.id %>
   <div>
     <%= form.submit %>
   </div>
