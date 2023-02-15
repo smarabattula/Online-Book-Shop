@@ -11,5 +11,6 @@ Rails.application.routes.draw do
   get 'login', to: "sessions#new", as: 'login'
   get 'logout', to: "sessions#destroy", as: 'logout'
   get '/books/:id', to: 'books#show'
+  get '/high_rating', to: "books#high_rating"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

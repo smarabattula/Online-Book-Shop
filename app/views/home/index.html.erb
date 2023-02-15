@@ -2,18 +2,15 @@
 <h1>Online Shopping System</h1>
 <% if current_user %>
   Logged in as <%= current_user.name %>.
-  <%= link_to "Edit profile", edit_user_path(current_user)%>
-  <%= button_to "Delete", user_path(current_user), method: :delete, data: { confirm: 'Are you sure?' } if !current_user.is_admin?%><br>
-  <% if current_user.is_admin? %>
-    <%= link_to "View all Books", books_path %><br>
-    <%= link_to "View all Users", users_path %><br>
-    <%= link_to "View all Reviews", reviews_path %><br>
-  <% else %>
-    <%= link_to "View all Books", books_path %><br>
+  <% if !current_user.is_admin? %>
+    <%= link_to "Edit profile", edit_user_path(current_user)%><br>
+    <%= link_to "View #{current_user.name}'s Review(s)", reviews_path%><br>
+    <%= button_to "Delete", user_path(current_user), method: :delete, data: { confirm: 'Are you sure?' }%><br>
+  <%else %>
+    <%= link_to "View all Users", users_path%><br>
   <% end %>
-
-  <%= link_to "Log Out", logout_path %>
-
+  <%= link_to "View all Books", books_path%><br>
+  <%= link_to "Log Out", logout_path %><br>
 <% else %>
   <%= link_to "Sign Up", signup_path %> or
   <%= link_to "Log In", login_path %>
