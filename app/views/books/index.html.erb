@@ -10,19 +10,41 @@
 
   <%= submit_tag("Filter") %>
 <% end %>
-<div id="books">
-  <% @books.each do |book| %>
-    <%= render book %>
-    <p>
-      <td><%= link_to "Show this book", book %></td>
-      <td><%= link_to_if book.Stock > 0, 'Purchase this book', new_transaction_path(:book_id => book.id)%></td>
-      <% if current_user %>
-        <%= link_to "Write a Review", new_review_path(book_id: book.id) %>
-      <% end %>
-      <td><%= link_to_if book.Stock > 0 && current_user.is_admin?, 'Purchase this book', new_transaction_path(:book_id => book.id)%></td>
-    </p>
-  <% end %>
-</div>
 
-<%= link_to "New book", new_book_path %>
-<%= link_to "High rating books", high_rating_path %>
+<table>
+  <thead>
+  <tr>
+    <th>Title</th>
+    <th>Author</th>
+    <th>Publisher</th>
+    <th>Price</th>
+    <th>Stock</th>
+    <th>Average Rating</th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @books.each do |book| %>
+    <tr>
+      <td><%= book.Name %></td>
+      <td><%= book.Author %></td>
+      <td><%= book.Publisher %></td>
+      <td><%= book.Price %></td>
+      <td><%= book.Stock %></td>
+      <td><%= sprintf("%.2f", book.reviews.average(:rating).to_f) %></td>
+      <td>
+        <%= link_to "Show this book", book %>
+        <% if book.Stock > 0 %>
+          <%= link_to "Purchase", new_transaction_path(book_id: book.id), class: "btn btn-sm btn-success" %>
+        <% end %>
+        <% if current_user %>
+          <%= link_to "Write Review", new_review_path(book_id: book.id), class: "btn btn-sm btn-info" %>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<%= link_to "New Book", new_book_path, class: "btn btn-sm btn-primary" %>
+<%= link_to "High rating books", high_rating_path, class: "btn btn-sm btn-warning" %>

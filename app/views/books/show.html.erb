@@ -8,3 +8,19 @@
 
   <%= button_to "Destroy this book", @book, method: :delete %>
 </div>
+
+<div>
+  <h2>Reviews</h2>
+  <% @book.reviews.each do |review| %>
+    <p>
+      <strong>Rating:</strong>
+      <%= review.Rating %>
+    </p>
+    <p>
+      <strong>Review:</strong>
+      <%= review.Review %>
+    </p>
+    <hr>
+  <% end %>
+  <%= link_to "View all reviews", book_path(@book) %>
+</div>

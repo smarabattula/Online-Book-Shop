@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :transactions, except: [:edit, :show]
-  resources :reviews, except: [:show]
+  resources :reviews
   resources :users, except: [:show]
   resources :books do
     get :filter, on: :collection
