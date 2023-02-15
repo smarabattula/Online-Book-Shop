@@ -12,6 +12,7 @@ class ReviewsController < ApplicationController
 
   # GET /reviews/new
   def new
+    @book = Book.find(params[:book_id])
     @review = Review.new
   end
 
@@ -21,8 +22,12 @@ class ReviewsController < ApplicationController
 
   # POST /reviews or /reviews.json
   def create
-    @review = Review.new(review_params)
-
+    #@review = Review.new(review_params)
+    p params, review_params, "ccc"
+    @book = Book.find(review_params[:book_id])
+    @review = @book.reviews.create(review_params)
+    @review.user = current_user
+    #@review.book = Book.find(params[:book_id])
     respond_to do |format|
       if @review.save
         format.html { redirect_to review_url(@review), notice: "Review was successfully created." }
@@ -65,6 +70,6 @@ class ReviewsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def review_params
-      params.require(:review).permit(:users_id, :books_id, :Rating, :Review)
+      params.require(:review).permit(:user_id, :book_id, :Rating, :Review)
     end
 end

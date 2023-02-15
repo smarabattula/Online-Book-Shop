@@ -4,9 +4,13 @@
   Logged in as <%= current_user.name %>.
   <%= link_to "Edit profile", edit_user_path(current_user)%>
   <%= button_to "Delete", user_path(current_user), method: :delete, data: { confirm: 'Are you sure?' } if !current_user.is_admin?%><br>
-  <%= link_to "View all Books", books_path if current_user.is_admin?%><br>
-  <%= link_to "View all Users", users_path if current_user.is_admin?%><br>
-  <%= link_to "View all Reviews", reviews_path if current_user.is_admin?%><br>
+  <% if current_user.is_admin? %>
+    <%= link_to "View all Books", books_path %><br>
+    <%= link_to "View all Users", users_path %><br>
+    <%= link_to "View all Reviews", reviews_path %><br>
+  <% else %>
+    <%= link_to "View all Books", books_path %><br>
+  <% end %>
 
   <%= link_to "Log Out", logout_path %>
 

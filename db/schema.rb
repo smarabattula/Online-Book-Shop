@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_13_062713) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_15_000302) do
   create_table "books", force: :cascade do |t|
     t.string "Name"
     t.string "Author"
@@ -26,10 +26,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_13_062713) do
     t.string "Review"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "users_id", null: false
-    t.integer "books_id", null: false
-    t.index ["books_id"], name: "index_reviews_on_books_id"
-    t.index ["users_id"], name: "index_reviews_on_users_id"
+    t.integer "user_id", null: false
+    t.integer "book_id", null: false
+    t.index ["book_id"], name: "index_reviews_on_book_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
   create_table "transactions", force: :cascade do |t|
@@ -58,8 +58,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_13_062713) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
-  add_foreign_key "reviews", "books", column: "books_id"
-  add_foreign_key "reviews", "users", column: "users_id"
+  add_foreign_key "reviews", "books"
+  add_foreign_key "reviews", "users"
   add_foreign_key "transactions", "books"
   add_foreign_key "transactions", "users"
 end
