@@ -1,76 +1,76 @@
-<h1>Editing user</h1>
+<% if flash[:notice] %>
+  <div class="alert alert-success">
+    <%= flash[:notice] %>
+  </div>
+<%else%>
 
-<!--%= render "form", user: @user %>
+  <h1>Editing user</h1>
 
-<br>
+  <% user = @user %>
+  <br>
 
-<div>
+  <%= form_with(model: user) do |form| %>
+    <% if user.errors.any? %>
+      <div style="color: red">
+        <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
 
-</div-->
-<% user = @user %>
-<br>
+        <ul>
+          <% user.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
 
-<%= form_with(model: user) do |form| %>
-  <% if user.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+    <p> You are editing user <% current_user.username %> </p>
+    <div class="field">
+      <%= form.label :name, style: "display: block" %>
+      <%= form.text_field :name%>
+    </div>
 
-      <ul>
-        <% user.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+    <div class="field">
+      <%= form.label :email, style: "display: block" %>
+      <%= form.text_field :email %>
+    </div>
+    <%if !user.is_admin?%>
+
+    <div class="field" style="display: none">
+      <%= form.label :username, style: "display: block" %>
+      <%= form.text_field :username %>
+    </div>
+
+    <div class="field">
+      <%= form.label :password, style: "display: block" %>
+      <%= form.password_field :password %>
+    </div>
+
+    <div class="field">
+      <%= form.label :password_confirmation, style: "display: block" %>
+      <%= form.password_field :password_confirmation %>
+    </div>
+
+    <div clss="field">
+      <%= form.label :address, style: "display: block" %>
+      <%= form.text_field :address %>
+    </div>
+
+    <div class="field">
+      <%= form.label :credit_card_number, style: "display: block" %>
+      <%= form.text_field :credit_card_number %>
+    </div>
+
+    <div class="field">
+      <%= form.label :phone_number, style: "display: block" %>
+      <%= form.text_field :phone_number %>
+    </div>
+
+    <div class="field" style="display: none">
+      <%= form.label :is_admin, style: "display: block" %>
+      <%= form.check_box :is_admin %>
+    </div>
+      <%end%>
+    <div class="actions" label="Update">
+      <%= form.submit %>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
-  </div>
-
-  <div class="field">
-    <%= form.label :email, style: "display: block" %>
-    <%= form.text_field :email %>
-  </div>
-  <%if !user.is_admin?%>
-
-  <div class="field" style="display: none">
-    <%= form.label :username, style: "display: block" %>
-    <%= form.text_field :username %>
-  </div>
-
-  <div class="field">
-    <%= form.label :password, style: "display: block" %>
-    <%= form.password_field :password %>
-  </div>
-
-  <div class="field">
-    <%= form.label :password_confirmation, style: "display: block" %>
-    <%= form.password_field :password_confirmation %>
-  </div>
-
-  <div clss="field">
-    <%= form.label :address, style: "display: block" %>
-    <%= form.text_field :address %>
-  </div>
-
-  <div class="field">
-    <%= form.label :credit_card_number, style: "display: block" %>
-    <%= form.text_field :credit_card_number %>
-  </div>
-
-  <div class="field">
-    <%= form.label :phone_number, style: "display: block" %>
-    <%= form.text_field :phone_number %>
-  </div>
-
-  <div class="field" style="display: none">
-    <%= form.label :is_admin, style: "display: block" %>
-    <%= form.check_box :is_admin %>
-  </div>
-    <%end%>
-  <div class="actions" label="Update">
-    <%= form.submit %>
-  </div>
-<% end %>
-
+<%end%>

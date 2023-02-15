@@ -9,22 +9,33 @@ class UsersController < ApplicationController
 
   # GET /users/1 or /users/1.json
   def show
+=begin commented
     @user = User.find(params[:id])
 
     respond_to do |format|
       format.html
       format.json { render json: @user}
     end
+=end
   end
 
   # GET /users/new
   def new
-    @user = User.new
+    if current_user.is_admin?
+      @user = User.new
+    else
+      flash[:notice] = "You aren't authorized to view this page"
+    end
+
   end
 
   # GET /users/1/edit
   def edit
-    @user = User.find(params[:id])
+    if current_user.is_admin?
+      @user = User.find(params[:id])
+    else
+      flash[:notice] = "You aren't authorized to view this page"
+    end
   end
 
   # POST /users or /users.json

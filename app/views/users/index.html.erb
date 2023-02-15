@@ -4,12 +4,12 @@
 
 <div id="users">
   <% @users.each do |user|%>
-  <%if !user.is_admin? %>
-    <%= render user%>
-    <p>
-      <%= link_to "Show this user", user %>
-    </p>
-  <% end %>
+    <%if !user.is_admin? %>
+      <%= render user%>
+      <p>
+        <!--%= link_to "Show this user", user %-->
+      </p>
+    <% end %>
   <% end %>
 </div>
 

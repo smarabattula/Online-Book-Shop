@@ -1,9 +1,16 @@
-<h1>New transaction</h1>
+<% if flash[:notice] %>
+  <div class="alert alert-success">
+    <%= flash[:notice] %>
+  </div>
+<%else%>
 
-<%= render "form", transaction: @transaction %>
+  <h1>New transaction</h1>
 
-<br>
+  <%= render "form", transaction: @transaction %>
 
-<div>
-  <%= link_to "Back to transactions", transactions_path %>
-</div>
+  <br>
+
+  <div>
+    <%= link_to "Back to transactions", transactions_path %>
+  </div>
+<%end%>
