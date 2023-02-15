@@ -6,6 +6,16 @@ class BooksController < ApplicationController
     @books = Book.all
   end
 
+  def filter
+    @books = Book.all
+    if params[:author].present?
+      @books = @books.where(author: params[:author])
+    end
+    if params[:rating].present?
+      @books = Book.joins(:reviews).where(reviews: { rating: params[:rating]})
+    end
+    render :index
+  end
   # GET /books/1 or /books/1.json
   def show
     @book = Book.find(params[:id])
