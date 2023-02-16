@@ -2,6 +2,17 @@
 
 <h1>Reviews</h1>
 
+<%if current_user.is_admin?%>
+  <%= form_tag(filter_reviews_path, method: :get) do %>
+    <%= label_tag(:username, "Username:") %>
+    <%= text_field_tag(:username) %>
+
+    <%= label_tag(:book_name, "Book Name:") %>
+    <%= text_field_tag(:book_name) %>
+    <%= submit_tag("Filter") %>
+  <% end %>
+<% end %>
+
 <div id="reviews">
   <% @reviews.each do |review| %>
     <%= render review %>
