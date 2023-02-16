@@ -46,5 +46,5 @@
   </tbody>
 </table>
 
-<%= link_to "New Book", new_book_path, class: "btn btn-sm btn-primary" %>
+<%= link_to "New Book", new_book_path, class: "btn btn-sm btn-primary" if current_user.is_admin?%>
 <%= link_to "High rating books", high_rating_path, class: "btn btn-sm btn-warning" %>

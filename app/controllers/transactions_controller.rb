@@ -24,8 +24,7 @@ class TransactionsController < ApplicationController
     @transaction = Transaction.new
 
     if @book.nil?
-      flash[:notice] = "You cannot view this page, go back"
-      #@book = Book.find(params[:book_id])
+      @book = Book.find(params[:book_id])
     end
   end
 
