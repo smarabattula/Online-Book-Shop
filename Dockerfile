@@ -57,6 +57,7 @@ RUN bundle exec rails assets:precompile
 RUN bundle exec rails db:migrate
 RUN bundle exec rails db:seed
 
+RUN bundle exec rake app:update:bin
 
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 3000
