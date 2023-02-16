@@ -6,6 +6,38 @@ class ReviewsController < ApplicationController
     @reviews = Review.all
   end
 
+  def filter
+    if current_user.is_admin?
+      @reviews = Review.all
+      if params[:username].present?
+        @user = User.find_by(username: params[:username])
+        if @user
+          @reviews = @reviews.where(user_id: @user.id)
+        else
+          flash.now[:notice] = "No user found!"
+          render :index and return
+        end
+      end
+
+      if params[:book_name].present?
+        @book = Book.find_by(Name: params[:book_name])
+        if @book
+          @reviews = @reviews.where(book_id: @book.id)
+        else
+          flash.now[:notice] = "No such books found!"
+          render :index and return
+        end
+      end
+      if @reviews.empty?
+        flash.now[:notice] = "No reviews found."
+      else
+        render :index
+      end
+    else
+      flash[:notice] = "You can't access this!"
+    end
+  end
+
   # GET /reviews/1 or /reviews/1.json
   def show
   end
