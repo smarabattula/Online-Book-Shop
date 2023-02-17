@@ -7,7 +7,6 @@ class ReviewsController < ApplicationController
   end
 
   def filter
-    if current_user.is_admin?
       @reviews = Review.all
       if params[:username].present?
         @user = User.find_by(username: params[:username])
@@ -33,10 +32,7 @@ class ReviewsController < ApplicationController
       else
         render :index
       end
-    else
-      flash[:notice] = "You can't access this!"
     end
-  end
 
   # GET /reviews/1 or /reviews/1.json
   def show
