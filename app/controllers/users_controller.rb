@@ -21,12 +21,7 @@ class UsersController < ApplicationController
 
   # GET /users/new
   def new
-    if current_user.is_admin?
-      @user = User.new
-    else
-      flash[:notice] = "You aren't authorized to view this page"
-    end
-
+    @user = User.new
   end
 
   # GET /users/1/edit
