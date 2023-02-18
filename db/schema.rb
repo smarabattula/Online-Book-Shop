@@ -48,14 +48,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_15_060138) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "username"
-    t.string "password_digest"
-    t.string "name"
-    t.string "email"
+    t.string "username", null: false
+    t.string "password_digest", default: "", null: false
+    t.string "name", null: false
+    t.string "email", default: "", null: false
     t.string "address"
     t.string "credit_card_number"
     t.string "phone_number"
-    t.boolean "is_admin"
+    t.boolean "is_admin", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["username"], name: "index_users_on_username", unique: true
