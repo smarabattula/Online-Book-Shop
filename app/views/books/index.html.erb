@@ -31,7 +31,7 @@
       <td><%= book.Publisher %></td>
       <td><%= book.Price %></td>
       <td><%= book.Stock %></td>
-      <td><%= sprintf("%s", book.reviews.present? ? book.reviews.average(:rating).to_f : "N/A") %></td>
+      <td><%= sprintf("%.2f", book.reviews.present? ? book.reviews.average(:rating).to_f : "N/A") %></td>
       <td><%= link_to "Show book", book %></td>
         <% if book.Stock > 0 %>
           <td><%= link_to "Purchase", new_transaction_path(book_id: book.id), class: "btn btn-sm btn-success" %></td>
