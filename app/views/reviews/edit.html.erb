@@ -1,3 +1,9 @@
+<% if flash[:notice] %>
+  <div class="alert alert-success">
+    <%= flash[:notice] %>
+  </div>
+<%else%>
+
 <h1>Editing review</h1>
 
 <%= render "form", review: @review %>
@@ -8,3 +14,5 @@
   <%= link_to "Show this review", @review %> |
   <%= link_to "Back to reviews", reviews_path %>
 </div>
+
+<%end%>

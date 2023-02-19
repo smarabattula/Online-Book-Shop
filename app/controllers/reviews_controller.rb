@@ -13,6 +13,7 @@ class ReviewsController < ApplicationController
         if @user
           @reviews = @reviews.where(user_id: @user.id)
         else
+          @reviews = Review.where(user_id: -1)
           flash.now[:notice] = "No user found!"
           render :index and return
         end
@@ -23,6 +24,7 @@ class ReviewsController < ApplicationController
         if @book
           @reviews = @reviews.where(book_id: @book.id)
         else
+          @reviews = Review.where(user_id: -1)
           flash.now[:notice] = "No such books found!"
           render :index and return
         end
@@ -46,6 +48,12 @@ class ReviewsController < ApplicationController
 
   # GET /reviews/1/edit
   def edit
+    if current_user == @review.user or current_user.is_admin?
+      @review = Review.find(params[:id])
+      @book = @review.book
+    else
+      flash.now[:notice] = "You are not authorized to edit this review."
+    end
   end
 
   # POST /reviews or /reviews.json
@@ -79,11 +87,17 @@ class ReviewsController < ApplicationController
 
   # DELETE /reviews/1 or /reviews/1.json
   def destroy
-    @review.destroy
-
-    respond_to do |format|
-      format.html { redirect_to reviews_url, notice: "Review was successfully destroyed." }
-      format.json { head :no_content }
+    if current_user == @review.user or current_user.is_admin?# check if current user is the author of the review
+      @review.destroy
+      respond_to do |format|
+        format.html { redirect_to reviews_url, notice: "Review was successfully destroyed." }
+        format.json { head :no_content }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to reviews_url, alert: "You are not authorized to delete this review." }
+        format.json { head :no_content }
+      end
     end
   end
 

@@ -4,29 +4,41 @@ class UsersController < ApplicationController
 
   # GET /users or /users.json
   def index
-    @users = User.all
+    if current_user.is_admin?
+      @users = User.all
+    else
+      flash[:notice] = "You aren't authorized to view the users index page"
+    end
   end
 
   # GET /users/1 or /users/1.json
   def show
-=begin commented
-    @user = User.find(params[:id])
+    if current_user.is_admin? or current_user.id == params[:id].to_i
+      @user = User.find(params[:id])
 
-    respond_to do |format|
-      format.html
-      format.json { render json: @user}
+      respond_to do |format|
+        format.html
+        format.json { render json: @user}
+      end
+    else
+      flash[:notice] = "You aren't authorized to view this user's page"
     end
-=end
   end
 
   # GET /users/new
   def new
-    @user = User.new
+    if current_user.nil?
+      @user = User.new
+    elsif current_user.is_admin?
+      @user = User.new
+    else
+      flash[:notice] = "You aren't authorized to view this page"
+    end
   end
 
   # GET /users/1/edit
   def edit
-    if current_user.is_admin?
+    if current_user.is_admin? or current_user.id == params[:id].to_i
       @user = User.find(params[:id])
     else
       flash[:notice] = "You aren't authorized to view this page"

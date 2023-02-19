@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+<!--p id="notice"><%= notice %></p-->
 <h1>Online Shopping System</h1>
 <% if current_user %>
   Logged in as <%= current_user.name %>.<br>
@@ -9,7 +9,7 @@
   <%else%>
       <%= button_to "Delete Account", user_path(current_user), method: :delete, data: { confirm: 'Are you sure?' }%><br>
   <%end%>
-  <%= link_to "View Reviews", reviews_path%><br>
+  <%= link_to "View Reviews", reviews_path%>|
   <%= link_to "View Transactions", show_transactions_path%><br>
   <%= link_to "Log Out", logout_path %>
 
