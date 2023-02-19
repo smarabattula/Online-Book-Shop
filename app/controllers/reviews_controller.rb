@@ -38,6 +38,7 @@ class ReviewsController < ApplicationController
 
   # GET /reviews/1 or /reviews/1.json
   def show
+    @review = Review.find(params[:id])
   end
 
   # GET /reviews/new

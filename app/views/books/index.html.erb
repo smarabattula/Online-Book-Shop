@@ -31,16 +31,18 @@
       <td><%= book.Publisher %></td>
       <td><%= book.Price %></td>
       <td><%= book.Stock %></td>
-      <td><%= sprintf("%.2f", book.reviews.average(:rating).to_f) %></td>
-      <td>
-        <%= link_to "Show this book", book %>
+      <td><%= sprintf("%s", book.reviews.present? ? book.reviews.average(:rating).to_f : "N/A") %></td>
+      <td><%= link_to "Show book", book %></td>
         <% if book.Stock > 0 %>
-          <%= link_to "Purchase", new_transaction_path(book_id: book.id), class: "btn btn-sm btn-success" %>
+          <td><%= link_to "Purchase", new_transaction_path(book_id: book.id), class: "btn btn-sm btn-success" %></td>
         <% end %>
         <% if current_user %>
-          <%= link_to "Write Review", new_review_path(book_id: book.id), class: "btn btn-sm btn-info" %>
+         <td> <%= link_to "Write Review", new_review_path(book_id: book.id), class: "btn btn-sm btn-info" %></td>
         <% end %>
-      </td>
+      <%if current_user.is_admin?%>
+          <td><%= link_to "Edit book", edit_book_path(book) %></td>|
+          <td><%= button_to "Delete book", book_path(book), onclick: "return confirm('Are you sure you want to delete this book?')", method: :delete %></td>
+        <%end%>
     </tr>
   <% end %>
   </tbody>

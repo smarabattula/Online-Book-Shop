@@ -1,13 +1,28 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @review %>
+
+<table cellspacing=20 >
+  <thead>
+    <tr>
+      <th>Book Name</th>
+      <th>User Name</th>
+      <th>Rating</th>
+      <th>Review </th>
+      <th colspan="5"></th>
+    </tr>
+  </thead>
+
+    <tbody>
+        <tr>
+        <td><%= @review.book.Name %></td>
+        <td><%= @review.user.username %></td>
+        <td><%= @review.Rating %></td>
+        <td><%= @review.Review %></td>
+        </tr>
+    </tbody>
+</table>
 
 <div>
   <%= link_to "Back to reviews", reviews_path %>
-
-  <%if current_user.is_admin?%>
-    <%= link_to "Edit this review", edit_review_path(@review) %>
-    <%= button_to "Destroy this review", @review, data: { confirm: "Are you sure you want to delete this review?" }, method: :delete %>
-  <%end%>
 </div>
 
