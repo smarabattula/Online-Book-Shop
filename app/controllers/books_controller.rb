@@ -27,12 +27,20 @@ class BooksController < ApplicationController
 
   # GET /books/new
   def new
-    @book = Book.new
+    if current_user.is_admin?
+      @book = Book.new
+    else
+      flash.now[:notice] = "You aren't authorized to create new books"
+    end
   end
 
   # GET /books/1/edit
   def edit
-    @book = Book.find(params[:id])
+    if current_user.is_admin?
+      @book = Book.find(params[:id])
+    else
+      flash.now[:notice] = "You aren't authorized to edit books"
+    end
   end
 
   # POST /books or /books.json

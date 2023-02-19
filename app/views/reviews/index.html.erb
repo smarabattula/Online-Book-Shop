@@ -12,17 +12,32 @@
     <%= submit_tag("Filter") %>
   <% end %>
 
+<table cellspacing=20 >
+  <thead>
+    <tr>
+      <th>Book Name</th>
+      <th>User Name</th>
+      <th>Rating</th>
+      <th>Review </th>
+      <th colspan="5"></th>
+    </tr>
+  </thead>
 
-<div id="reviews">
-  <% @reviews.each do |review| %>
-    <div class="review">
-      <p><%= review.user.name %> on <%= review.book.Name %>:</p>
-      <%= render review %>
-      <p>
-        <%= link_to "Show this review", review %>
-      </p>
-    </div>
-  <% end %>
+    <% @reviews.each do |review|%>
+    <tbody>
+        <tr>
+        <%= hidden_field :book_id, value: review.book.id %>
+        <td><%= review.book.Name %></td>
+        <td><%= review.user.username %></td>
+        <td><%= review.Rating %></td>
+        <td><%= review.Review %></td>
+        <th style="width: 200px;"><%= link_to "Show this review", review %></th>
+        <th><%= link_to "Edit this review", edit_review_path(review) if(current_user.is_admin? or current_user.id == review.user.id)%></td>
+
+        </tr>
+    </tbody>
+    <%end%>
+</table>
+<div>
 </div>
 
-<!--%= link_to "New review", new_review_path %-->
