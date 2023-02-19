@@ -71,14 +71,6 @@ class BooksController < ApplicationController
     end
   end
 
-  # Rating is 0 ~ 10
-  def high_rating
-    high_rating_book_ids = Review.group(:books_id).average("Rating").select do |item,val|
-      val > 7
-    end
-    @high_rating_books = Book.where(id: high_rating_book_ids.keys)
-  end
-
   # DELETE /books/1 or /books/1.json
   def destroy
     @book.destroy
