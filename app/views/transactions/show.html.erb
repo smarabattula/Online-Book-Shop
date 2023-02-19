@@ -1,3 +1,9 @@
+<% if flash[:notice] %>
+  <div class="alert alert-success">
+    <%= flash[:notice] %>
+  </div>
+<%else%>
+
 <p style="color: green"><%= notice %></p>
 
 <table cellspacing=20 >
@@ -13,24 +19,20 @@
       <th>Quantity</th>
       <th>Total Price</th>
       <th colspan="5"></th>
-
     </tr>
   </thead>
-    <% @transactions.each do |transaction|%>
   <tbody>
-        <td><%= transaction.transaction_number %></td>
-        <td><%= transaction.book_id %></td>
-        <td><%= transaction.book.Name %></td>
-        <td><%= transaction.user_id %></td>
-        <td><%= transaction.credit_card_number %></td>
-        <td><%= transaction.address %></td>
-        <td><%= transaction.phone_number %></td>
-        <td><%= transaction.quantity %></td>
-        <td><%= transaction.total_price %></td>
+        <td><%= @transaction.transaction_number %></td>
+        <td><%= @transaction.book_id %></td>
+        <td><%= @transaction.book.Name %></td>
+        <td><%= @transaction.user.Name %></td>
+        <td><%= @transaction.credit_card_number %></td>
+        <td><%= @transaction.address %></td>
+        <td><%= @transaction.phone_number %></td>
+        <td><%= @transaction.quantity %></td>
+        <td><%= @transaction.total_price %></td>
     </tr>
   </tbody>
-  <%end%>
 </table>
-<div>
-</div>
+<%end%>
 

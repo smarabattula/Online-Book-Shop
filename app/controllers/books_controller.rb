@@ -12,7 +12,13 @@ class BooksController < ApplicationController
       @books = @books.where(author: params[:author])
     end
     if params[:rating].present?
-      @books = @books.select {|book| book.reviews.average(:Rating) >= params[:rating].to_f }
+      @books = @books.select do |book|
+        if book.reviews.present?
+          book.reviews.average(:Rating) >= params[:rating].to_f
+        else
+          book = nil
+        end
+      end
     end
     if @books.empty?
       flash.now[:notice] = "No books found."
@@ -22,7 +28,7 @@ class BooksController < ApplicationController
   # GET /books/1 or /books/1.json
   def show
     @book = Book.find(params[:id])
-    @average_rating = @book.reviews.average(:rating)
+    @average_rating = @book.reviews.present? ? @book.reviews.average(:rating) : "N/A"
   end
 
   # GET /books/new

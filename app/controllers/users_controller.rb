@@ -32,7 +32,7 @@ class UsersController < ApplicationController
     elsif current_user.is_admin?
       @user = User.new
     else
-      flash[:notice] = "You aren't authorized to view this page"
+      flash[:notice] = "You aren't authorized to create new user"
     end
   end
 
@@ -41,7 +41,7 @@ class UsersController < ApplicationController
     if current_user.is_admin? or current_user.id == params[:id].to_i
       @user = User.find(params[:id])
     else
-      flash[:notice] = "You aren't authorized to view this page"
+      flash[:notice] = "You aren't authorized to edit other users"
     end
   end
 

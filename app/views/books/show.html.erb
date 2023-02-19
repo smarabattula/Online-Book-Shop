@@ -4,24 +4,28 @@
 
 <div>
   <%= link_to "Back to books", books_path %>
-  <%if current_user.is_admin?%>
-    <%= link_to "Edit this book", edit_book_path(@book) %>|
-    <%= button_to "Destroy this book", @book, method: :delete%>
-  <%end%>
 </div>
 
 <div>
   <h2>Reviews</h2>
-  <% @book.reviews.each do |review| %>
-    <p>
-      <strong>Rating:</strong>
-      <%= review.Rating %>
-    </p>
-    <p>
-      <strong>Review:</strong>
-      <%= review.Review %>
-    </p>
-    <hr>
-  <% end %>
-  <%= link_to "View all reviews", book_path(@book) %>
+  <table cellspacing=20 >
+    <thead>
+      <tr>
+        <th>User Name</th>
+        <th>Rating</th>
+        <th>Review </th>
+        <th colspan="5"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @book.reviews.each do |review| %>
+        <tr>
+          <th><%= review.user.name %></th>
+          <th><%= review.Rating %></th>
+          <th><%= review.Review %></th>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= link_to "View all reviews", reviews_path %>
 </div>

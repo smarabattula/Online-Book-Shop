@@ -1,5 +1,5 @@
 <!--p id="notice"><%= notice %></p-->
-<h1>Online Shopping System</h1>
+<h1>Online Book Shop</h1>
 <% if current_user %>
   Logged in as <%= current_user.name %>.<br>
   <%= link_to "Edit profile", edit_user_path(current_user)%><br>
@@ -7,7 +7,7 @@
   <% if current_user.is_admin?%>
     <%= link_to "View All Users", users_path%>
   <%else%>
-      <%= button_to "Delete Account", user_path(current_user), method: :delete, data: { confirm: 'Are you sure?' }%><br>
+      <%= button_to "Delete Account", user_path(current_user), onclick: "return confirm('Are you sure you want to delete your account?')", method: :delete%><br>
   <%end%>
   <%= link_to "View Reviews", reviews_path%>|
   <%= link_to "View Transactions", show_transactions_path%><br>

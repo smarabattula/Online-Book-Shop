@@ -12,11 +12,9 @@ class TransactionsController < ApplicationController
 
   # GET /transactions/1 or /transactions/1.json
   def show
-    if current_user.is_admin?
-      @transactions = Transaction.all
-    else
-     # @transactions = Transaction.where(user_id: current_user.id)
-     @transactions = current_user.transactions
+    @transaction = Transaction.find(params[:id])
+    if !current_user.is_admin? and current_user.id != @transaction.user.id
+      flash.now[:notice] = "Cannot access other user's transactions!"
     end
   end
   # GET /transactions/new
