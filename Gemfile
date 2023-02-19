@@ -72,3 +72,6 @@ group :test do
 end
 
 gem 'bcrypt', '~> 3.1.7'
+gem 'rspec-rails'
+gem 'rails-controller-testing'
+gem 'factory_bot_rails'
