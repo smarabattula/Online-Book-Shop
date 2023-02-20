@@ -33,12 +33,12 @@ class TransactionsController < ApplicationController
   # POST /transactions or /transactions.json
   def create
     @transaction = Transaction.new(transaction_params)
-
-    @transaction.transaction_number = Array.new(10){[*"A".."Z", *"0".."9"].sample}.join
     @book = Book.find(params[:transaction][:book_id])
-    @transaction.user_id = current_user.id
-    @book.Stock = @book.Stock - @transaction.quantity
-    @book.save
+    @book.with_lock do
+      @transaction.transaction_number = Array.new(10){[*"A".."Z", *"0".."9"].sample}.join
+      @transaction.user_id = current_user.id
+      @book.update(Stock: @book.Stock - @transaction.quantity)
+    end
 
     respond_to do |format|
       if @transaction.save
