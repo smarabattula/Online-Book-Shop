@@ -22,14 +22,14 @@
       </div>
     <% end %>
 
-    <p> You are editing user <% current_user.username %> </p>
+    <p> You are editing user <%= current_user.name %> </p>
     <div class="field">
-      <%= form.label :name, style: "display: block" %>
+      <%= form.label :name,"Name*", style: "display: block" %>
       <%= form.text_field :name%>
     </div>
 
     <div class="field">
-      <%= form.label :email, style: "display: block" %>
+      <%= form.label :email, "Email*",style: "display: block" %>
       <%= form.text_field :email %>
     </div>
     <%if !user.is_admin?%>
@@ -40,13 +40,13 @@
     </div>
 
     <div class="field">
-      <%= form.label :password, style: "display: block" %>
-      <%= form.password_field :password %>
+      <%= form.label :password,"Password*", style: "display: block" %>
+      <%= form.password_field :password, value: user.password_digest %>
     </div>
 
     <div class="field">
-      <%= form.label :password_confirmation, style: "display: block" %>
-      <%= form.password_field :password_confirmation %>
+      <%= form.label :password_confirmation,"Password confirmation*", style: "display: block" %>
+      <%= form.password_field :password_confirmation, value: user.password_digest %>
     </div>
 
     <div clss="field">
