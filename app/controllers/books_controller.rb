@@ -6,11 +6,14 @@ class BooksController < ApplicationController
     @books = Book.all
   end
 
+  #Filter books based on Author or Average Rating
   def filter
     @books = Book.all
+  #Author is entered, filter it
     if params[:author].present?
       @books = @books.where(author: params[:author])
     end
+  #Average Rating is entered, filter it
     if params[:rating].present?
       @books = @books.select do |book|
         if book.reviews.present?
@@ -28,11 +31,12 @@ class BooksController < ApplicationController
   # GET /books/1 or /books/1.json
   def show
     @book = Book.find(params[:id])
-    @average_rating = @book.reviews.present? ? @book.reviews.average(:rating) : "N/A"
+    @average_rating = @book.reviews.present? ? @book.reviews.average(:rating) : "N/A" # default value for average_rating
   end
 
   # GET /books/new
   def new
+    #only admin can create new books
     if current_user.is_admin?
       @book = Book.new
     else
@@ -42,6 +46,7 @@ class BooksController < ApplicationController
 
   # GET /books/1/edit
   def edit
+    #only admin can edit books
     if current_user.is_admin?
       @book = Book.find(params[:id])
     else

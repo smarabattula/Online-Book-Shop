@@ -38,10 +38,12 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+    #Only edit if current user is admin or id matches with URL's id parameter
     if current_user.is_admin? or current_user.id == params[:id].to_i
       @user = User.find(params[:id])
     else
       flash[:notice] = "You aren't authorized to edit other users"
+      redirect_to root_url
     end
   end
 
