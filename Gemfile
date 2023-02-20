@@ -69,9 +69,10 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "webdrivers"
+  gem 'rspec-rails'
+  gem 'rails-controller-testing'
+  gem 'factory_bot_rails'
+  gem 'shoulda-matchers', '~> 4.5'
 end
 
 gem 'bcrypt', '~> 3.1.7'
-gem 'rspec-rails'
-gem 'rails-controller-testing'
-gem 'factory_bot_rails'
