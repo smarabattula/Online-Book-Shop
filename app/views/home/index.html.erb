@@ -1,5 +1,11 @@
 <!--p id="notice"><%= notice %></p-->
+<% if flash[:notice] %>
+  <div class="alert alert-fail">
+    <%= flash[:notice] %>
+  </div>
+<%end%>
 <h1>Online Book Shop</h1>
+
 <% if current_user %>
   Logged in as <%= current_user.name %>.<br>
   <%= link_to "Edit profile", edit_user_path(current_user)%><br>

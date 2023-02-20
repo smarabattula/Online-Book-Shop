@@ -2,7 +2,7 @@ class SessionsController < ApplicationController
   skip_before_action :authorized, only: [:new, :create]
   def new
   end
-
+  #Create New Session and assign user
   def create
     user = User.find_by_username(params[:username])
     if user && user.authenticate(params[:password])
@@ -14,6 +14,7 @@ class SessionsController < ApplicationController
     end
   end
 
+  #End Current Session
   def destroy
     session[:user_id] = nil
     session.delete(:user_id)

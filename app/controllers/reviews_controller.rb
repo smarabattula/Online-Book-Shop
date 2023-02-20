@@ -5,9 +5,10 @@ class ReviewsController < ApplicationController
   def index
     @reviews = Review.all
   end
-
+  #Filters reviews based on username/bookname
   def filter
       @reviews = Review.all
+      #If username is present
       if params[:username].present?
         @user = User.find_by(username: params[:username])
         if @user
@@ -18,7 +19,7 @@ class ReviewsController < ApplicationController
           render :index and return
         end
       end
-
+      #If book name is entered
       if params[:book_name].present?
         @book = Book.find_by(Name: params[:book_name])
         if @book
@@ -49,6 +50,7 @@ class ReviewsController < ApplicationController
 
   # GET /reviews/1/edit
   def edit
+    #Admin can edit all reviews. User can edit if the review is written by him
     if current_user == @review.user or current_user.is_admin?
       @review = Review.find(params[:id])
       @book = @review.book
@@ -88,7 +90,8 @@ class ReviewsController < ApplicationController
 
   # DELETE /reviews/1 or /reviews/1.json
   def destroy
-    if current_user == @review.user or current_user.is_admin?# check if current user is the author of the review
+    # check if current user is the author of the review
+    if current_user == @review.user or current_user.is_admin?
       @review.destroy
       respond_to do |format|
         format.html { redirect_to reviews_url, notice: "Review was successfully destroyed." }
