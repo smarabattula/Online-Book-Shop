@@ -17,10 +17,27 @@
   </div>
 
   <div>
+    <p style="color: red;">Disclaimer: Only 1000 characters are allowed for the review.</p>
     <%= form.label :Review, style: "display: block" %>
-    <%= form.text_field :Review %>
+    <div style="width: 300px; height: 150px; overflow-y: scroll; border: 1px solid #ccc; padding: 5px;">
+      <%= form.text_area :Review, style: "width: 100%; height: 100%; border: none; outline: none;", maxlength: 1000 %>
+    </div>
+    <p style="color: red;"><span id="char-count"><%= form.object.Review.to_s.length %></span> / 1000 characters used</p>
   </div>
+
+  <script>
+      // Get the text area element and character count element
+      var reviewText = document.querySelector("#review_Review");
+      var charCount = document.querySelector("#char-count");
+
+      // Update the character count when the text area changes
+      reviewText.addEventListener("input", function() {
+          charCount.innerText = reviewText.value.length;
+      });
+  </script>
+
   <%= form.hidden_field :book_id, value: @book.id %>
+
   <div>
     <%= form.submit %>
   </div>
