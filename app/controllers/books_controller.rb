@@ -16,14 +16,14 @@ class BooksController < ApplicationController
         if book.reviews.present?
           book.reviews.average(:Rating) >= params[:rating].to_f
         else
-          book = nil
+          false
         end
       end
     end
     if @books.empty?
       flash.now[:notice] = "No books found."
     end
-    render :index
+    render :index, locals: { average_rating: "N/A" } # default value for average_rating
   end
   # GET /books/1 or /books/1.json
   def show

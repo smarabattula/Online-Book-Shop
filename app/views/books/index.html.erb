@@ -3,10 +3,10 @@
 <h1>All Books</h1>
 <%= form_tag(filter_books_path, method: :get) do %>
   <%= label_tag(:author, "Author:") %>
-  <%= text_field_tag(:author) %>
+  <%= text_field_tag(:author, params[:author]) %>
 
   <%= label_tag(:rating, "Rating:") %>
-  <%= select_tag(:rating, options_for_select([1, 2, 3, 4, 5])) %>
+  <%= select_tag(:rating, options_for_select([1, 2, 3, 4, 5], params[:rating]), include_blank: true) %>
 
   <%= submit_tag("Filter") %>
 <% end %>
@@ -31,7 +31,7 @@
       <td><%= book.Publisher %></td>
       <td><%= book.Price %></td>
       <td><%= book.Stock %></td>
-      <td><%= sprintf("%.2f", book.reviews.present? ? book.reviews.average(:rating).to_f : "N/A") %></td>
+      <td><%= book.reviews.present? ? sprintf("%.2f", book.reviews.average(:rating).to_f) : "N/A" %></td>
       <td><%= link_to "Show book", book %></td>
         <% if book.Stock > 0 %>
           <td><%= link_to "Purchase", new_transaction_path(book_id: book.id), class: "btn btn-sm btn-success" %></td>
