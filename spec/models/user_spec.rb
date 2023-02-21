@@ -10,6 +10,20 @@ RSpec.describe User, type: :model do
     it { should_not allow_value('not email format').for(:email) }
     it { should validate_presence_of(:password) }
     it { should validate_length_of(:password).is_at_least(6) }
+
+    context "when user is not admin" do
+      subject(:user) {FactoryBot.build(:user)}
+      it "has false on is_admin" do
+        expect(user.is_admin).to eq(false )
+      end
+    end
+
+    context "when user is admin" do
+      subject(:admin) {FactoryBot.build(:user,:admin)}
+      it "has true on is_admin" do
+        expect(admin.is_admin).to eq(true)
+      end
+    end
     end
 
   describe 'associations' do
@@ -23,4 +37,4 @@ RSpec.describe User, type: :model do
       expect(user.password_digest).not_to be_nil
     end
   end
-end
+  end
