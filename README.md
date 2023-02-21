@@ -3,7 +3,7 @@
 ## Project details
 This is a project for CSC517 course, which is an online bookshop, developed on Rails application.
 
-The application is deployed at `http://152.7.177.15:3000/`
+The application is deployed at http://152.7.177.15:3000/
 
 ## Admin Credentials 
 
