@@ -8,16 +8,17 @@ The application is deployed at http://152.7.177.15:3000/
 ## Admin Credentials 
 
 There will only be one admin preconfigured and the credentials for the admin are
+
 `username - admin`
 
 `password - 1234`
 
-## User created by admin Credentials 
+## User (created via seeding) Credentials 
 
 The password for user created by admin 
 `username: user`
 
-`password: defaultpassword`
+`password: 1234`
 
 ## Testing instructions
 
