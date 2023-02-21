@@ -7,5 +7,9 @@ FactoryBot.define do
     phone_number {"1231231231"}
     credit_card_number {"1231231231231231"}
     address {"aaaaaaaaa"}
+    trait :admin do
+      is_admin { true }
+      end
   end
   end
+
