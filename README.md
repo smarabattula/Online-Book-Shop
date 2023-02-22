@@ -51,10 +51,6 @@ The password for user created by admin
 |http://152.7.177.15:3000/reviews/filter?username=&book_name=ValkyraeSlayer&commit=Filter| Reviews written for a bookname |
 |![image](https://media.github.ncsu.edu/user/26627/files/58b79cd9-8d57-41bb-8fd1-247d22bdce40)||
 
-|![image](https://media.github.ncsu.edu/user/26627/files/31f8917b-429a-403f-8892-414bb4e91859)||
-
-
-
 ## Testing instructions
 
 To run the tests use the below commands and check if they succeed
@@ -64,10 +60,7 @@ To test the models and controllers, run
 
 ## Edge cases
 
-`Filtering reviews:` <br/>
-When both username and bookname filters are present, the reviews should be filtered with the intersection of both these filters. If no reviews match the intersection of these filters, then a message "No Books Found" should be displayed to the user.
-
-`Book creation:` <br/>
+`Book create:` <br/>
 Only Admin has the option to add books. <br/>
 A book with no name or blank name, which would fail the validation of presence for Name. <br/>
 A book with no author or blank author, which would fail the validation of presence for Author. <br/>
@@ -75,21 +68,27 @@ A book with no publisher or blank publisher, which would fail the validation of 
 A book with a negative price, which would fail the numericality validation of Price. <br/>
 A book with a negative stock quantity, which would fail the numericality validation of Stock. 
 
-`Book updation:` <br/>
+`Book update:` <br/>
 Only admin gets the option to edit book details. 
 
-`Review creation:` <br/>
+`Book delete:` <br/> 
+Only admin gets the option to delete book details.
+
+`Review create:` <br/>
 A User can find add review option only for existing list of Books (in view books). <br/>
 A User ratings for books only range from 1 to 5. <br/>
 A Review cannot be blank. 
 
-`Review updation:` <br/>
+`Review update:` <br/>
 A User can edit only his/her reviews. <br/>
 Only admin can edit others' reviews.
 
-`Review deletion:` <br/>
+`Review delete:` <br/>
 Only admin can delete others' reviews. <br/>
 If user deletes his own account, his reviews also deleted.
+
+`Reviews Filter :` <br/>
+When both username and bookname filters are present, the reviews should be filtered with the intersection of both these filters. If no reviews match the intersection of these filters, then a message "No Books Found" should be displayed to the user.
 
 `Empty Username and Password:` <br/>
 If the user submits an empty username and password field, the application should return an error message stating that the fields are required
@@ -104,8 +103,7 @@ If the user enters a valid username and password, the application should log in 
 If the stock of the book is less than the quantity specified by the user, the transaction creation should fail and display an error message that the quantity should be <= available book stock.
 
 `Transaction deletion:` <br/>
-Only admin has the option of deleting transactions. <br/>
-If user deletes his own account, his transactions information is also deleted.
+If user deletes his own account, their transactions information is also deleted.
 
 `Transaction display:` <br/>
-A user can view only his/her own transactions. Admin can view all the transactions.
+A user can view only their own transactions. Admin can view all the transactions.
