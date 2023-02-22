@@ -8,13 +8,6 @@
 <%= render "form", book: @book %>
 
 <br>
-  <div class="field">
-    <%= form.label :password, "Password*", style: "display: block" %>
-    <%= form.password_field :password %>
-    <% if user.errors[:password].any? %>
-      <p style="color: red"><%= user.errors[:password].first %></p>
-    <% end %>
-  </div>
 <div>
   <%= link_to "Back to books", books_path %>
 </div>
