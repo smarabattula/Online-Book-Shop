@@ -4,6 +4,7 @@ class UsersController < ApplicationController
 
   # GET /users or /users.json
   def index
+    # If the current user is an admin, show all the users, else flash a notice message
     if current_user.is_admin?
       @users = User.all
     else
@@ -13,6 +14,8 @@ class UsersController < ApplicationController
 
   # GET /users/1 or /users/1.json
   def show
+    # If the current user is an admin or the requested user is the same as the current user, show the user details
+    # Otherwise, flash a notice message
     if current_user.is_admin? or current_user.id == params[:id].to_i
       @user = User.find(params[:id])
 
@@ -27,6 +30,7 @@ class UsersController < ApplicationController
 
   # GET /users/new
   def new
+    # If the current user is nil or an admin, create a new user, otherwise flash a notice message
     if current_user.nil?
       @user = User.new
     elsif current_user.is_admin?
@@ -49,6 +53,7 @@ class UsersController < ApplicationController
 
   # POST /users or /users.json
   def create
+    # Create a new user with the parameters given in the user_params method
     @user = User.new(user_params)
 
     respond_to do |format|
@@ -65,7 +70,7 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1 or /users/1.json
   def update
     @user = User.find(params[:id])
-
+    # Respond to the format of the request (HTML or JSON) and redirect or render the appropriate view
     respond_to do |format|
       if @user.update(user_params)
         format.html { redirect_to @user, notice: "User was successfully updated." }

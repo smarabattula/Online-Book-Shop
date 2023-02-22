@@ -23,6 +23,7 @@ class BooksController < ApplicationController
         end
       end
     end
+    # Display a message if no books were found
     if @books.empty?
       flash.now[:notice] = "No books found."
     end
@@ -31,12 +32,13 @@ class BooksController < ApplicationController
   # GET /books/1 or /books/1.json
   def show
     @book = Book.find(params[:id])
+    # Calculate the average rating of the book's reviews, or display "N/A" if there are no reviews
     @average_rating = @book.reviews.present? ? @book.reviews.average(:rating) : "N/A" # default value for average_rating
   end
 
   # GET /books/new
   def new
-    #only admin can create new books
+    # Only allow admins to create new books
     if current_user.is_admin?
       @book = Book.new
     else
@@ -57,7 +59,7 @@ class BooksController < ApplicationController
   # POST /books or /books.json
   def create
     @book = Book.new(book_params)
-
+    # Save the book and redirect to its page if successful, or display an error message if not
     respond_to do |format|
       if @book.save
         format.html { redirect_to book_url(@book), notice: "Book was successfully created." }
