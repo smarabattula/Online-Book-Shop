@@ -41,15 +41,42 @@ The password for user created by admin
 |![image](https://media.github.ncsu.edu/user/26627/files/6643b42a-a3ca-479f-a187-7f418c1c1233)||
 
 #### ADMIN
- 
 |URL|Description|
 |---|---|
-|http://152.7.177.15:3000/users | View all users |
-|![image](https://media.github.ncsu.edu/user/26627/files/618c3802-2635-4e50-bef5-d5b6ae8a2e61)||
+|http://152.7.177.15:3000/users/| View All Users |
+|![image](https://media.github.ncsu.edu/user/26627/files/d7d90706-92f1-4ee3-bdc6-ada6795248df)|
+|http://152.7.177.15:3000/users/2/edit| Edit Users |
+|![image](https://media.github.ncsu.edu/user/26627/files/798ca4a2-4718-4d4d-8dcf-6991634e9a5d)|
+|http://152.7.177.15:3000/users/2/edit| Edit Admin |
+|![image](https://media.github.ncsu.edu/user/26627/files/79eb583d-1a01-4cee-8059-5b9b662b8279)|
+|http://152.7.177.15:3000/users/| Delete Users |
+|![image](https://media.github.ncsu.edu/user/26627/files/c83361e2-9edc-4f62-a720-fa953d5271a2)|
+|http://152.7.177.15:3000/books/| Delete Books |
+|![image](https://media.github.ncsu.edu/user/26627/files/7d544855-7f9a-4b66-b61a-9bdec0df9e3f)|
+|http://152.7.177.15:3000/transactions| View all Transactions |
+|![image](https://media.github.ncsu.edu/user/26627/files/c6a5d3d1-deaf-4b46-b406-bc4342fe94f8)|
+
+####REVIEWS (Only admin can edit/delete all reviews, user can only edit his own reviews)
+|URL|Description|
+|---|---|
+|http://152.7.177.15:3000/reviews/new?book_id=2| Create Reviews |
+|![image](https://media.github.ncsu.edu/user/26627/files/60648070-a69e-4744-8ced-4a47101685f1)|
+|http://152.7.177.15:3000/reviews/1/edit| Edit Reviews (Only admin can edit all reviews, user can only edit his own reviews)|
+|![image](https://media.github.ncsu.edu/user/26627/files/60648070-a69e-4744-8ced-4a47101685f1)|
+|http://152.7.177.15:3000/reviews/| Delete Reviews |
+|![image](https://media.github.ncsu.edu/user/26627/files/660f80c7-91b0-4b26-9b40-543351df2ff6)|
 |http://152.7.177.15:3000/reviews/filter?username=user&book_name=&commit=Filter| Reviews written by a specific user |
-|![image](https://media.github.ncsu.edu/user/26627/files/8f2ba115-92f1-471f-8a63-26e24a3bfb13)||
+|![image](https://media.github.ncsu.edu/user/26627/files/8f2ba115-92f1-471f-8a63-26e24a3bfb13)|
 |http://152.7.177.15:3000/reviews/filter?username=&book_name=ValkyraeSlayer&commit=Filter| Reviews written for a bookname |
-|![image](https://media.github.ncsu.edu/user/26627/files/58b79cd9-8d57-41bb-8fd1-247d22bdce40)||
+|![image](https://media.github.ncsu.edu/user/26627/files/58b79cd9-8d57-41bb-8fd1-247d22bdce40)|
+
+####USER
+|URL|Description|
+|---|---|
+|http://152.7.177.15:3000/users/2/edit|Edit User|
+|![image](https://media.github.ncsu.edu/user/26627/files/4fd0a77e-0a1d-4cb2-981a-401edeb15a16)|
+|http://152.7.177.15:3000/| Delete User Account |
+|![image](https://media.github.ncsu.edu/user/26627/files/1b720038-1317-4506-8879-25700c99d580)|
 
 ## Testing instructions
 
