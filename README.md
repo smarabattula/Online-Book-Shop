@@ -61,3 +61,51 @@ To run the tests use the below commands and check if they succeed
 
 To test the models and controllers, run
 `rspec`
+
+## Edge cases
+
+Filtering reviews: 
+When both username and bookname filters are present, the reviews should be filtered with the intersection of both these filters. If no reviews match the intersection of these filters, then a message "No Books Found" should be displayed to the user.
+
+Book creation: 
+Only Admin has the option to add books.
+A book with no name or blank name, which would fail the validation of presence for Name.
+A book with no author or blank author, which would fail the validation of presence for Author.
+A book with no publisher or blank publisher, which would fail the validation of presence for Publisher.
+A book with a negative price, which would fail the numericality validation of Price.
+A book with a negative stock quantity, which would fail the numericality validation of Stock.
+
+Book updation: 
+Only admin gets the option to edit book details.
+
+Review creation: 
+A User can find add review option only for existing list of Books (in view books).
+A User ratings for books only range from 1 to 5.
+A Review cannot be blank. 
+
+Review updation: 
+A User can edit only his/her reviews.
+Only admin can edit others' reviews.
+
+Review deletion:
+Only admin can delete others' reviews.
+If user deletes his own account, his reviews also deleted.
+
+Empty Username and Password:
+If the user submits an empty username and password field, the application should return an error message stating that the fields are required
+
+Invalid username/password:
+If the user enters an invalid username or password, the application should display an error message indicating that the "username or password is invalid"
+
+Successful Login:
+If the user enters a valid username and password, the application should log in the user and redirect them to the root_url with a success message.
+
+Transaction creation:
+If the stock of the book is less than the quantity specified by the user, the transaction creation should fail and display an error message that the quantity should be <= available book stock.
+
+Transaction deletion:
+Only admin has the option of deleting transactions.
+If user deletes his own account, his transactions information is also deleted.
+
+Transaction display:
+A user can view only his/her own transactions. Admin can view all the transactions.
